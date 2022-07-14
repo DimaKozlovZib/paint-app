@@ -1,0 +1,53 @@
+*{
+    padding: 0;
+    margin: 0;
+    outline: none;
+    text-decoration: none;
+    font-family: 'Ubuntu', sans-serif;
+}
+body{
+    overflow: hidden;
+}
+$cl1: #3C6E71;
+$cl2: #284B63;
+$cl3: #D9D9D9;
+h1,h2,h3,h4,h5{
+    font-size: inherit;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100vh;
+}
+
+
+
+
+
+.header{
+    font-size: 24px;
+    color: #fff;
+    letter-spacing: 1px;
+    padding: 5px 15px;
+    background: $cl2;
+}
+
+
+.main{
+    display: flex;
+    flex: 1 1 auto;
+    .canvas{
+        flex: 1 1 auto;
+        canvas{
+            height:100%;
+            width: 100%;
+        }
+    }
+}
+.draw-settings{
+    background: $cl3;
+    width: 30%;
+    min-width: 250px;
+    height: 100%;
+}
