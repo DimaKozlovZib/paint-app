@@ -27,8 +27,10 @@ function canvas() {
             console.log(startingPoint)
         }
     })
-    canvas.addEventListener("mouseup", (event) => {
+    function drawFinish() {
         draw = false;
-    })
+    }
+    canvas.addEventListener("mouseup", drawFinish);
+    canvas.addEventListener("mouseout", drawFinish);
 }
 canvas();
