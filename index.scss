@@ -50,4 +50,9 @@ h1,h2,h3,h4,h5{
     width: 30%;
     min-width: 250px;
     height: 100%;
+    @media (max-width: 1000px) {
+        &{
+            display: none;
+        }
+    }
 }
