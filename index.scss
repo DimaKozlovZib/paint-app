@@ -39,17 +39,26 @@ h1,h2,h3,h4,h5{
     flex: 1 1 auto;
     .canvas{
         flex: 1 1 auto;
-        canvas{
-            height:100%;
+        .canvas{
             width: 100%;
         }
+        
     }
 }
+#bufer{
+    position: absolute;
+    display: none;
+}
 .draw-settings{
+    padding: 10px 10px;
     background: $cl3;
     width: 30%;
     min-width: 250px;
+    font-size: 22px;
     height: 100%;
+    .item__title{
+        margin-bottom: 15px;
+    }
     @media (max-width: 1000px) {
         &{
             display: none;
