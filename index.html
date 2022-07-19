@@ -5,12 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="colorPicker/color.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
     <title>paint app</title>
 </head>
 <body>
+    <canvas id="bufer" width="300" height="150"></canvas>
     <div class="wrapper">
         <header class="header">
             <div class="header__logo">
@@ -19,11 +21,17 @@
         </header>
         <main class="main">
             <section class="canvas">
-                <canvas id="canvas"></canvas>
+                <canvas id="canvas" class="canvas"></canvas>
             </section>
-            <aside class="draw-settings">
+            <aside class="draw-settings" id="aside">
                 <div class="draw-settings__section brush">
                     <div class="item__title"></div>
+                </div>
+                <div class="draw-settings__section color">
+                    <div class="item__title">Цвет</div>
+                    <div class="color-picker-box">
+
+                    </div>
                 </div>
             </aside>
         </main>
