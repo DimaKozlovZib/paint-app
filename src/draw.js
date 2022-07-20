@@ -22,12 +22,11 @@ colorPicker(document.querySelector(".color-picker-box"), (value) => {
         if (draw == true) {
             let x = event.clientX - canvas.offsetLeft;
             let y = event.clientY - canvas.offsetTop;
+            cx.lineWidth = window.brushSize;
             cx.moveTo(...startingPoint);
-            console.log(startingPoint)
             cx.lineTo(x, y);
             cx.stroke();
             startingPoint = [x, y];
-            console.log(startingPoint)
         }
     })
     function drawFinish() {
@@ -59,3 +58,32 @@ function resize() {
 
     cx.drawImage(buffer, 0, 0); //Draw it back to canvas
 }
+
+function sliderControl(sliderSelector, maxValue, functionValue) {
+    const slider = document.querySelector(sliderSelector);
+    const circal = document.querySelector(`${sliderSelector} [class*="circal"]`);
+    let circalRadius = circal.offsetWidth / 2;
+    let mousemove = false;
+
+    slider.onmousedown = () => {
+        mousemove = true;
+
+    }
+    slider.onmousemove = (event) => {
+        if (mousemove) {
+            let x = Math.floor(event.clientX - slider.offsetLeft);
+            let w = slider.offsetWidth;
+            console.log(x)
+            if (x >= circalRadius && x <= w - circalRadius) {
+                x -= circalRadius
+                circal.style.left = x + "px";
+                w -= circalRadius * 2;
+                functionValue(x / w * maxValue);
+            }
+        }
+    }
+    slider.onmouseup = () => { mousemove = false; };
+}
+sliderControl("#slider-control", 40, (value) => {
+    window.brushSize = value;
+})
