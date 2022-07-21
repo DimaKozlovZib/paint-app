@@ -9,6 +9,7 @@ colorPicker(document.querySelector(".color-picker-box"), (value) => {
     let cx = canvas.getContext("2d");
     let draw = false;
     let startingPoint;
+    window.brushSize = 2;
     let displayWidth = canvas.width = canvas.parentElement.clientWidth;
     let displayHeight = canvas.height = displayWidth / 16 * 9;
     canvas.style.height = displayHeight + "px";
@@ -59,7 +60,7 @@ function resize() {
     cx.drawImage(buffer, 0, 0); //Draw it back to canvas
 }
 
-function sliderControl(sliderSelector, maxValue, functionValue) {
+function sliderControl(sliderSelector, minValue, maxValue, functionValue) {
     const slider = document.querySelector(sliderSelector);
     const circal = document.querySelector(`${sliderSelector} [class*="circal"]`);
     let circalRadius = circal.offsetWidth / 2;
@@ -73,17 +74,17 @@ function sliderControl(sliderSelector, maxValue, functionValue) {
         if (mousemove) {
             let x = Math.floor(event.clientX - slider.offsetLeft);
             let w = slider.offsetWidth;
-            console.log(x)
             if (x >= circalRadius && x <= w - circalRadius) {
                 x -= circalRadius
                 circal.style.left = x + "px";
                 w -= circalRadius * 2;
-                functionValue(x / w * maxValue);
+                let result = (x / w * (maxValue - minValue) + minValue) * 2;
+                functionValue(result);
             }
         }
     }
     slider.onmouseup = () => { mousemove = false; };
 }
-sliderControl("#slider-control", 40, (value) => {
-    window.brushSize = value;
+sliderControl("#slider-control", 1, 40, (value) => {
+    window.brushSize = value === 0 ? 1 : value;
 })
