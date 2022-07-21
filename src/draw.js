@@ -1,4 +1,4 @@
-"use script";
+"use strict";
 import { colorPicker } from '../colorPicker/colorPicker.js';
 
 colorPicker(document.querySelector(".color-picker-box"), (value) => {
@@ -9,20 +9,20 @@ colorPicker(document.querySelector(".color-picker-box"), (value) => {
     let cx = canvas.getContext("2d");
     let draw = false;
     let startingPoint;
-    let displayWidth = canvas.parentElement.clientWidth;
-    let displayHeight = displayWidth / 16 * 9;
-    canvas.width = displayWidth;
-    canvas.height = displayHeight;
+    let displayWidth = canvas.width = canvas.parentElement.clientWidth;
+    let displayHeight = canvas.height = displayWidth / 16 * 9;
     canvas.style.height = displayHeight + "px";
     canvas.addEventListener("mousedown", (event) => {
         draw = true;
         startingPoint = [event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop];
     })
     canvas.addEventListener("mousemove", (event) => {
-        if (draw == true) {
+        if (draw) {
             let x = event.clientX - canvas.offsetLeft;
             let y = event.clientY - canvas.offsetTop;
+            cx.beginPath();
             cx.lineWidth = window.brushSize;
+            cx.lineCap = "round";
             cx.moveTo(...startingPoint);
             cx.lineTo(x, y);
             cx.stroke();
