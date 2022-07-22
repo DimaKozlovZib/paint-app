@@ -2,7 +2,7 @@
 import { colorPicker } from '../colorPicker/colorPicker.js';
 
 colorPicker(document.querySelector(".color-picker-box"), (value) => {
-    document.querySelector(".wrapper").style.background = value;
+    window.color = value;
 });
 (function Canvas() {
     const canvas = document.querySelector("#canvas");
@@ -10,27 +10,32 @@ colorPicker(document.querySelector(".color-picker-box"), (value) => {
     let draw = false;
     let startingPoint;
     window.brushSize = 2;
+    window.color = "#000";
+
     let displayWidth = canvas.width = canvas.parentElement.clientWidth;
     let displayHeight = canvas.height = displayWidth / 16 * 9;
     canvas.style.height = displayHeight + "px";
+
     canvas.addEventListener("mousedown", (event) => {
         draw = true;
         startingPoint = [event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop];
     })
     canvas.addEventListener("mousemove", (event) => {
         if (draw) {
+            cx.beginPath();
             let x = event.clientX - canvas.offsetLeft;
             let y = event.clientY - canvas.offsetTop;
-            cx.beginPath();
             cx.lineWidth = window.brushSize;
             cx.lineCap = "round";
             cx.moveTo(...startingPoint);
             cx.lineTo(x, y);
+            cx.strokeStyle = window.color;
             cx.stroke();
             startingPoint = [x, y];
         }
     })
     function drawFinish() {
+        cx.closePath();
         draw = false;
     }
     canvas.addEventListener("mouseup", drawFinish);
@@ -68,7 +73,6 @@ function sliderControl(sliderSelector, minValue, maxValue, functionValue) {
 
     slider.onmousedown = () => {
         mousemove = true;
-
     }
     slider.onmousemove = (event) => {
         if (mousemove) {

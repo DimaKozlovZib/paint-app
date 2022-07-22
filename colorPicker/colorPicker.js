@@ -10,10 +10,6 @@ export function colorPicker(box, resultSetterFunction) {
             <div class="circal" height="15" width="15"></div>
             <canvas id="gradient-canvas"></canvas>
         </div>
-        <div class="opasity-block">
-            <div class="circal" height="15" width="15"></div>
-            <canvas id="opasity-canvas"></canvas>
-        </div>
     </div>`);
     colorPickerResult = {
         set Result(value) {
@@ -23,10 +19,8 @@ export function colorPicker(box, resultSetterFunction) {
     window.S = 0;
     window.V = 100;
     window.H = 0;
-    window.opasity = 1;
     HueSelection();
     SaturationAndValueSelection(`rgba(${HueToRgb(0, 100, 100, 1)})`);
-    opasityCanvas()
 
     //color picker состоит из двух блоков один для получения цветового тона ,а другой для получения
     //насыщенности и яркости
@@ -63,7 +57,7 @@ function HueSelection() {
                 window.H = Math.floor(y / (h - circalDiametr) * 360);
                 SaturationAndValueSelection(`rgba(${HueToRgb(window.H, 100, 100, 1)})`);
 
-                colorPickerResult.Result = `rgba(${HueToRgb(window.H, window.S, window.V, window.opasity)})`;
+                colorPickerResult.Result = `rgba(${HueToRgb(window.H, window.S, window.V, 1)})`;
             }
         }
     }
@@ -118,7 +112,7 @@ function SaturationAndValueSelection(color) {
                 window.V = (100 - y / (h - circalDiametr) * 100);
                 window.S = window.S < 0 ? -window.S : window.S;
                 window.V = window.V < 0 ? -window.V : window.V;
-                colorPickerResult.Result = `rgba(${HueToRgb(window.H, window.S, window.V, window.opasity)})`;
+                colorPickerResult.Result = `rgba(${HueToRgb(window.H, window.S, window.V, 1)})`;
             }
         }
     }
@@ -178,7 +172,7 @@ function opasityCanvas() {
                 y -= Math.floor(circalDiametr / 2);
                 circalBlock.style.top = y + "px";
                 window.opasity = 1 - y / (h - circalDiametr);
-                colorPickerResult.Result = `rgba(${HueToRgb(window.H, window.S, window.V, window.opasity)})`;
+                colorPickerResult.Result = `rgba(${HueToRgb(window.H, window.S, window.V, 1)})`;
             }
         }
     }
