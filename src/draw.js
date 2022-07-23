@@ -3,6 +3,7 @@ import { colorPicker } from '../colorPicker/colorPicker.js';
 
 colorPicker(document.querySelector(".color-picker-box"), (value) => {
     window.color = value;
+    linePreview(window.color, window.brushSize);
 });
 (function Canvas() {
     const canvas = document.querySelector("#canvas");
@@ -64,31 +65,3 @@ function resize() {
 
     cx.drawImage(buffer, 0, 0); //Draw it back to canvas
 }
-
-function sliderControl(sliderSelector, minValue, maxValue, functionValue) {
-    const slider = document.querySelector(sliderSelector);
-    const circal = document.querySelector(`${sliderSelector} [class*="circal"]`);
-    let circalRadius = circal.offsetWidth / 2;
-    let mousemove = false;
-
-    slider.onmousedown = () => {
-        mousemove = true;
-    }
-    slider.onmousemove = (event) => {
-        if (mousemove) {
-            let x = Math.floor(event.clientX - slider.offsetLeft);
-            let w = slider.offsetWidth;
-            if (x >= circalRadius && x <= w - circalRadius) {
-                x -= circalRadius
-                circal.style.left = x + "px";
-                w -= circalRadius * 2;
-                let result = (x / w * (maxValue - minValue) + minValue) * 2;
-                functionValue(result);
-            }
-        }
-    }
-    slider.onmouseup = () => { mousemove = false; };
-}
-sliderControl("#slider-control", 1, 40, (value) => {
-    window.brushSize = value === 0 ? 1 : value;
-})
