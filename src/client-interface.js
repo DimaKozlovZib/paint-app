@@ -39,14 +39,12 @@ function linePreview(color, size) {
     let BgRect = Math.floor(displayWidth / 100 * k);
     let numColorRGB, cl1, cl2
 
-    cx.globalAlpha = 0.8;
+    cx.globalAlpha = 0.6;
     color.replace(/(\d+),(\d+),(\d+)/, (str) => { numColorRGB = str; })
     let numsColorRgbArray = numColorRGB.split(",").map(Number);
-
-    let min = Math.min(...numsColorRgbArray);
     let max = Math.max(...numsColorRgbArray);
 
-    if ((max + min) / 2 > 100) {
+    if (max > 147) {
         cl1 = "grey";
         cl2 = "black";
     } else {
