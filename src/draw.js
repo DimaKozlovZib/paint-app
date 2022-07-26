@@ -1,5 +1,6 @@
 "use strict";
 import { colorPicker } from '../colorPicker/colorPicker.js';
+window.eraser = false;
 
 colorPicker(document.querySelector(".color-picker-box"), (value) => {
     window.color = value;
@@ -7,30 +8,41 @@ colorPicker(document.querySelector(".color-picker-box"), (value) => {
 });
 (function Canvas() {
     const canvas = document.querySelector("#canvas");
+    const canvasParent = canvas.parentElement;
     let cx = canvas.getContext("2d");
     let draw = false;
     let startingPoint;
     window.brushSize = 2;
-    window.color = "#000";
-
-    let displayWidth = canvas.width = canvas.parentElement.clientWidth;
+    window.color = "rgb(0,0,0)";
+    console.log(canvas.offsetWidth)
+    let displayWidth = canvas.width = canvas.offsetWidth;
     let displayHeight = canvas.height = displayWidth / 16 * 9;
-    canvas.style.height = displayHeight + "px";
 
     canvas.addEventListener("mousedown", (event) => {
         draw = true;
-        startingPoint = [event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop];
+        let x = (event.clientX - canvas.offsetLeft) - canvasParent.offsetLeft;
+        let y = (event.clientY - canvas.offsetTop) - canvasParent.offsetTop;
+        startingPoint = [x, y];
     })
     canvas.addEventListener("mousemove", (event) => {
         if (draw) {
+            cx.globalCompositeOperation = "source-over";
+            if (window.eraser) {
+                cx.globalCompositeOperation = 'destination-out';
+                cx.strokeStyle = "rgba(0, 0, 0, 0)";
+            }
             cx.beginPath();
-            let x = event.clientX - canvas.offsetLeft;
-            let y = event.clientY - canvas.offsetTop;
-            cx.lineWidth = window.brushSize;
+            cx.strokeStyle = window.color;
             cx.lineCap = "round";
+            cx.lineWidth = window.brushSize;
+
+
+            console.log(cx.globalCompositeOperation)
+            let x = (event.clientX - canvas.offsetLeft) - canvasParent.offsetLeft;
+            let y = (event.clientY - canvas.offsetTop) - canvasParent.offsetTop;
+
             cx.moveTo(...startingPoint);
             cx.lineTo(x, y);
-            cx.strokeStyle = window.color;
             cx.stroke();
             startingPoint = [x, y];
         }
@@ -42,13 +54,16 @@ colorPicker(document.querySelector(".color-picker-box"), (value) => {
     canvas.addEventListener("mouseup", drawFinish);
     canvas.addEventListener("mouseout", drawFinish);
 }())
-window.onresize = () => resize();
+window.onresize = () => resize(
+    document.querySelector("#canvas").parentElement.clientWidth,
+    document.querySelector("#canvas").width
+);
 
-function resize() {
+function resize(w, h) {
     const canvas = document.querySelector("#canvas");
     let cx = canvas.getContext("2d");
-    let displayWidth = canvas.parentElement.clientWidth;
-    let lastWidth = canvas.width;
+    let displayWidth = w;
+    let lastWidth = h;
     let displayHeight = displayWidth / 16 * 9;
     let buffer = document.querySelector("#bufer");
     let bufferCx = buffer.getContext("2d");

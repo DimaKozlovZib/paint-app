@@ -16,7 +16,7 @@ function sliderControl(sliderSelector, minValue, maxValue, functionValue) {
                 x -= circalRadius
                 circal.style.left = x + "px";
                 w -= circalRadius * 2;
-                let result = (x / w * (maxValue - minValue) + minValue) * 1.5;
+                let result = (x / w * (maxValue - minValue) + minValue) * 2;
                 functionValue(result);
             }
         }
@@ -40,7 +40,7 @@ function linePreview(color, size) {
     let numColorRGB, cl1, cl2
 
     cx.globalAlpha = 0.6;
-    color.replace(/(\d+),(\d+),(\d+)/, (str) => { numColorRGB = str; })
+    color.replace(/(\d+),(\d+),(\d+)/, (str) => { numColorRGB = str; });
     let numsColorRgbArray = numColorRGB.split(",").map(Number);
     let max = Math.max(...numsColorRgbArray);
 
@@ -80,3 +80,10 @@ function linePreview(color, size) {
     cx.closePath();
 }
 linePreview("rgb(0,0,0)", 2);
+
+document.querySelector("#eraser").onclick = () => {
+    window.eraser = true;
+}
+document.querySelector("#pensil").onclick = () => {
+    window.eraser = false;
+}

@@ -1,87 +1,96 @@
-*{
+* {
     padding: 0;
     margin: 0;
     outline: none;
     text-decoration: none;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: "Ubuntu", sans-serif;
 }
-body{
+body {
     overflow: hidden;
 }
-$cl1: #3C6E71;
-$cl2: #284B63;
-$cl3: #D9D9D9;
+$cl1: #3c6e71;
+$cl2: #284b63;
+$cl3: #d9d9d9;
 $cl4: #353535;
-h1,h2,h3,h4,h5{
+h1,
+h2,
+h3,
+h4,
+h5 {
     font-size: inherit;
 }
-.wrapper{
+.wrapper {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     height: 100vh;
 }
 
-
-
-
-
-.header{
+.header {
     font-size: 24px;
     color: #fff;
     letter-spacing: 1px;
     padding: 5px 15px;
-    background: $cl2;
+    background: $cl4;
 }
 
-
-.main{
+.main {
     display: flex;
     flex: 1 1 auto;
-    .canvas{
-        flex: 1 1 auto;
-        .canvas{
-            width: 100%;
-        }
-        
+}
+.canvas {
+    flex: 1 1 auto;
+    position: relative;
+    background-color: #e9ecef;
+    overflow: auto;
+    padding: 10px 0px;
+    #canvas {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background-color: #fff;
+        position: absolute;
+        width: 96%;
     }
 }
-#bufer{
+#bufer {
     position: absolute;
     display: none;
 }
-.draw-settings{
+.draw-settings {
     padding: 10px 15px;
     background: $cl3;
     font-size: 22px;
     width: 240px;
     height: 100%;
-    & > *{
+    & > * {
         margin-bottom: 10px;
     }
-    .item__title{
+    .item__title {
         margin-bottom: 10px;
     }
-    &__slider-control{
+    &__slider-control {
         display: flex;
         gap: 5px;
-        .slider-control{
+        .slider-control {
             position: relative;
             flex: 1 1 auto;
-            &__line{
+            &__line {
                 height: 8px;
                 width: 100%;
                 background-color: #fff;
                 border-radius: 4px;
             }
-            &__circal{
+            &__circal {
                 height: 15px;
                 width: 15px;
                 border-radius: 50%;
                 cursor: pointer;
                 background-color: $cl4;
             }
-            *{
+            * {
                 content: "";
                 position: absolute;
                 top: 0px;
@@ -89,22 +98,22 @@ h1,h2,h3,h4,h5{
                 margin: auto 0;
             }
         }
-        .slider-control__value{
+        .slider-control__value {
             font-size: 15px;
         }
     }
     @media (max-width: 1000px) {
-        &{
+        & {
             display: none;
         }
     }
 }
 
-.line-preview-box{
+.line-preview-box {
     width: 100%;
     height: 70px;
     margin-bottom: 10px;
-    canvas{
+    canvas {
         width: 100%;
         height: 70px;
     }
