@@ -25,38 +25,53 @@
             </section>
 
             <aside class="draw-settings" id="aside">
-                <div class="draw-settings__section tools">
-                    <button class="tools__item" id="pensil">
+                <div class="mobile-button-box">
+                    <button class="tools-mobile-icon" data-toolNumber="0">
                         <img src="image/pensil.png" alt="pen">
                     </button>
-                    <button class="tools__item" id="eraser">
-                        <img src="image/eraser.png" alt="eraser">
+                    <button class="draw-settings__section__mobile-icon" data-section="brush">
+                        <img src="image/settings.png" alt="brush">
+                    </button>
+                    <button class="draw-settings__section__mobile-icon" data-section="color">
+                        <img src="image/colour.png" alt="color">
+                    </button>
+                    <button class="menu">
+                        <span></span>
                     </button>
                 </div>
-                <div class="draw-settings__section brush">
-                    <div class="item__title">Кисть</div>
-                    <div class="line-preview-box">
-                        <canvas id="line-preview"></canvas>
+                <div class="draw-settings__contant">
+                        <div class="draw-settings__section tools">
+                        <button class="tools__item" id="pensil">
+                            <img src="image/pensil.png" alt="pen">
+                        </button>
+                        <button class="tools__item" id="eraser">
+                            <img src="image/eraser.png" alt="eraser">
+                        </button>
                     </div>
-                    <div class="draw-settings__slider-control">
-                        <div class="min-value slider-control__value">1</div>
-                        <div class="slider-control" id="slider-control">
-                            <div class="slider-control__line"></div>
-                            <div class="slider-control__circal"></div>
+                    <div class="draw-settings__section brush">
+                        <div class="item__title">Кисть</div>
+                        <div class="line-preview-box">
+                            <canvas id="line-preview"></canvas>
                         </div>
-                        <div class="maxx-value slider-control__value">40</div>
+                        <div class="draw-settings__slider-control">
+                            <div class="min-value slider-control__value">1</div>
+                            <div class="slider-control" id="slider-control">
+                                <div class="slider-control__line"></div>
+                                <div class="slider-control__circal"></div>
+                            </div>
+                            <div class="maxx-value slider-control__value">40</div>
+                        </div>
+                    </div>
+                    <div class="draw-settings__section color">
+                        <div class="item__title">Цвет</div>
+                        <div class="color-picker-box"></div>
                     </div>
                 </div>
-                <div class="draw-settings__section color">
-                    <div class="item__title">Цвет</div>
-                    <div class="color-picker-box">
-
-                    </div>
-                </div>
+                
             </aside>
         </main>
     </div>
     <script src="src/client-interface.js"></script>
-    <script type="module" src="src/draw.js"></script>
+    <script type="module" src="src/draw.js"></script> 
 </body>
 </html>

@@ -19,6 +19,11 @@ h4,
 h5 {
     font-size: inherit;
 }
+button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -37,6 +42,12 @@ h5 {
 .main {
     display: flex;
     flex: 1 1 auto;
+    @media (max-width: 1000px) {
+        & {
+            flex-direction: column-reverse;
+            position: relative;
+        }
+    }
 }
 .canvas {
     flex: 1 1 auto;
@@ -44,6 +55,7 @@ h5 {
     background-color: #e9ecef;
     overflow: auto;
     padding: 10px 0px;
+    
     #canvas {
         top: 0;
         bottom: 0;
@@ -59,15 +71,19 @@ h5 {
     position: absolute;
     display: none;
 }
+[class*=__mobile-icon]{
+    display: none;
+    align-self: start;
+}
+.mobile-button-box{
+    display: none;
+}
 .draw-settings {
     padding: 10px 15px;
     background: $cl3;
     font-size: 22px;
-    width: 240px;
+    box-sizing: border-box;
     height: 100%;
-    & > * {
-        margin-bottom: 10px;
-    }
     .item__title {
         margin-bottom: 10px;
     }
@@ -102,12 +118,19 @@ h5 {
             font-size: 15px;
         }
     }
-    @media (max-width: 1000px) {
-        & {
-            display: none;
-        }
+}
+
+
+.tools{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    img{
+        width: 35px;
+        height: 35px;
     }
 }
+
 
 .line-preview-box {
     width: 100%;
@@ -116,5 +139,106 @@ h5 {
     canvas {
         width: 100%;
         height: 70px;
+    }
+}
+
+.menu{
+    align-self: center;
+    margin-left: auto;
+    position: relative;
+    width:30px;
+    height: 20px;
+    span{
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+    &::before{
+        top: 0;
+    }
+    &::after{
+        bottom: 0;
+    }
+    span, &::before, &::after{
+        position: absolute;
+        content: "";
+        right: 0;
+        left: 0;
+        height: 3px;
+        width: 100%;
+        background-color: #353535;
+    }
+    &.active{
+        span{
+
+        }
+        &::before{
+    
+        }
+        &::after{
+    
+        }
+        span, &::before, &::after{
+    
+        }
+    }
+}
+
+.draw-settings{
+    @media (max-width: 1000px) {
+        & {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 3px 15px;
+            position: absolute;
+            top: 0;
+            &.active{
+                height: 100%;
+            }
+            [class*=menu-box]{
+                display: none;
+            }
+            &__contant{
+                flex: 1 1 auto;
+            }
+            .draw-settings__section{
+                margin-bottom: 0;
+                position: absolute;
+                top: -100000px;
+                left: -100000px;
+                &.active{
+                    position: static;
+                    display: block;
+                }
+            }
+            .mobile-button-box{
+                display: flex;
+            }
+            .menu{
+                display: block;
+            }
+
+            [class*=__mobile-icon]{
+                display: block;
+                padding: 8px;
+                transition: background-color 0.5s ease;
+                border-radius: 50%;
+                img{
+                    width: 28px;
+                    height: 28px;
+                }
+                &:hover{
+                    background-color: #B0B5BF;
+                }
+            }
+            
+        }
+    }
+    @media (max-width: 500px){
+        &{
+            gap: 0px;
+        }
     }
 }

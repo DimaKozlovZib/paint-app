@@ -87,3 +87,20 @@ document.querySelector("#eraser").onclick = () => {
 document.querySelector("#pensil").onclick = () => {
     window.eraser = false;
 }
+
+document.querySelectorAll("[class*=__mobile-icon]").forEach(item => {
+    item.addEventListener("click", () => {
+        let parentElementClass = document.querySelector(`.${item.getAttribute("data-section")}`).classList;
+        let aside = document.querySelector(".draw-settings").classList;
+        if (parentElementClass.contains("active")) {
+            parentElementClass.remove("active");
+            aside.remove("active");
+        } else {
+            document.querySelectorAll(".draw-settings__section").forEach(item => item.classList.remove("active"));
+            parentElementClass.add("active");
+            aside.add("active");
+        }
+    })
+})
+
+

@@ -18,6 +18,12 @@ h5 {
   font-size: inherit;
 }
 
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -49,6 +55,16 @@ h5 {
           flex: 1 1 auto;
 }
 
+@media (max-width: 1000px) {
+  .main {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+    position: relative;
+  }
+}
+
 .canvas {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
@@ -75,16 +91,24 @@ h5 {
   display: none;
 }
 
+[class*=__mobile-icon] {
+  display: none;
+  -ms-flex-item-align: start;
+      -ms-grid-row-align: start;
+      align-self: start;
+}
+
+.mobile-button-box {
+  display: none;
+}
+
 .draw-settings {
   padding: 10px 15px;
   background: #d9d9d9;
   font-size: 22px;
-  width: 240px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   height: 100%;
-}
-
-.draw-settings > * {
-  margin-bottom: 10px;
 }
 
 .draw-settings .item__title {
@@ -132,10 +156,19 @@ h5 {
   font-size: 15px;
 }
 
-@media (max-width: 1000px) {
-  .draw-settings {
-    display: none;
-  }
+.tools {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+
+.tools img {
+  width: 35px;
+  height: 35px;
 }
 
 .line-preview-box {
@@ -147,5 +180,105 @@ h5 {
 .line-preview-box canvas {
   width: 100%;
   height: 70px;
+}
+
+.menu {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-left: auto;
+  position: relative;
+  width: 30px;
+  height: 20px;
+}
+
+.menu span {
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.menu::before {
+  top: 0;
+}
+
+.menu::after {
+  bottom: 0;
+}
+
+.menu span, .menu::before, .menu::after {
+  position: absolute;
+  content: "";
+  right: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #353535;
+}
+
+@media (max-width: 1000px) {
+  .draw-settings {
+    width: 100%;
+    height: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 3px 15px;
+    position: absolute;
+    top: 0;
+  }
+  .draw-settings.active {
+    height: 100%;
+  }
+  .draw-settings [class*=menu-box] {
+    display: none;
+  }
+  .draw-settings__contant {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+  }
+  .draw-settings .draw-settings__section {
+    margin-bottom: 0;
+    position: absolute;
+    top: -100000px;
+    left: -100000px;
+  }
+  .draw-settings .draw-settings__section.active {
+    position: static;
+    display: block;
+  }
+  .draw-settings .mobile-button-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .draw-settings .menu {
+    display: block;
+  }
+  .draw-settings [class*=__mobile-icon] {
+    display: block;
+    padding: 8px;
+    -webkit-transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease;
+    border-radius: 50%;
+  }
+  .draw-settings [class*=__mobile-icon] img {
+    width: 28px;
+    height: 28px;
+  }
+  .draw-settings [class*=__mobile-icon]:hover {
+    background-color: #B0B5BF;
+  }
+}
+
+@media (max-width: 500px) {
+  .draw-settings {
+    gap: 0px;
+  }
 }
 /*# sourceMappingURL=index.css.map */
