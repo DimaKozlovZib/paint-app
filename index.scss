@@ -120,7 +120,9 @@ button{
     }
 }
 
-
+.color-picker-box{
+    min-width: 240px;
+}
 .tools{
     display: flex;
     align-items: center;
@@ -130,7 +132,6 @@ button{
         height: 35px;
     }
 }
-
 
 .line-preview-box {
     width: 100%;

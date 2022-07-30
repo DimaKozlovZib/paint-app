@@ -156,6 +156,10 @@ button {
   font-size: 15px;
 }
 
+.color-picker-box {
+  min-width: 240px;
+}
+
 .tools {
   display: -webkit-box;
   display: -ms-flexbox;
