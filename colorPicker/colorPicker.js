@@ -30,7 +30,7 @@ function HueSelection() {
     //w - width canvas, h - heigth canvas
     let canvas = document.querySelector("#gradient-canvas");
     let cx = canvas.getContext("2d");
-    let w = canvas.clientWidth, h = canvas.clientHeight;
+    let w = 35, h = 200;
     canvas.width = w; canvas.height = h;
     let gradientBg = cx.createLinearGradient(w / 2, 0, w / 2, h);
     let hue = [[225, 0, 0], [225, 225, 0], [0, 225, 0], [0, 225, 225], [0, 0, 225], [225, 0, 225], [225, 0, 0]];
@@ -43,14 +43,17 @@ function HueSelection() {
 
     let moveCircal = false;
     let block = document.querySelector(".color-block");
+    let rect;
     let circalBlock = document.querySelector(".color-block .circal");
     let circalDiametr = circalBlock.offsetWidth;
     block.onmousedown = () => {
         moveCircal = true;
+        rect = block.getBoundingClientRect();
+        console.log(rect)
     }
     block.onmousemove = (event) => {
         if (moveCircal) {
-            let y = Math.floor(event.clientY - block.offsetTop);
+            let y = Math.floor(event.clientY - rect.y);
             if (y <= h - (circalDiametr / 2) && y >= (circalDiametr / 2)) {
                 y -= Math.floor(circalDiametr / 2);
                 circalBlock.style.top = y + "px";
@@ -68,7 +71,7 @@ function HueSelection() {
 
 function SaturationAndValueSelection(color) {
     let canvas = document.querySelector("#saturation-canvas");
-    let w = canvas.clientWidth, h = canvas.clientHeight;
+    let w = 200, h = 200;
     canvas.width = w; canvas.height = h;
     let cx = canvas.getContext("2d");
     cx.clearRect(0, 0, w, h)
@@ -91,16 +94,20 @@ function SaturationAndValueSelection(color) {
     let block = document.querySelector(".saturation-block");
     let moveCircal = false;
     let y, x;
+    let rect;
+
     let circalBlock = document.querySelector(".saturation-block .circal");
     let circalDiametr = circalBlock.offsetWidth;
 
     block.onmousedown = () => {
         moveCircal = true;
+        rect = block.getBoundingClientRect();
     }
     block.onmousemove = (event) => {
         if (moveCircal) {
-            y = event.clientY - block.offsetTop;
-            x = event.clientX - block.offsetLeft;
+            y = event.clientY - rect.y;
+            x = event.clientX - rect.x;
+            console.log(rect.y)
             let condition1 = (y <= h - circalDiametr / 2 && y - circalDiametr / 2 >= 0);
             let condition2 = (x <= w - circalDiametr / 2 && x - circalDiametr / 2 >= 0)
             if (condition1 && condition2) {

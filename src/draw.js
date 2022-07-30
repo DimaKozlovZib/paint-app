@@ -9,20 +9,26 @@ colorPicker(document.querySelector(".color-picker-box"), (value) => {
 (function Canvas() {
     const canvas = document.querySelector("#canvas");
     const canvasParent = canvas.parentElement;
+    let parentTop = canvas.parentElement.offsetTop + canvas.parentElement.parentElement.offsetTop;
+    let parentLeft = canvas.parentElement.offsetLeft + canvas.parentElement.parentElement.offsetLeft;
     let cx = canvas.getContext("2d");
     let draw = false;
-    let startingPoint;
+    let displayWidth = canvas.width = canvas.offsetWidth;
+    let displayHeight = canvas.height = displayWidth / 16 * 9;
+    let startingPoint, rect, x, y;
+
     window.brushSize = 2;
     window.color = "rgb(0,0,0)";
     console.log(canvas.offsetWidth)
-    let displayWidth = canvas.width = canvas.offsetWidth;
-    let displayHeight = canvas.height = displayWidth / 16 * 9;
+
 
     canvas.addEventListener("mousedown", (event) => {
         draw = true;
-        let x = (event.clientX - canvas.offsetLeft) - canvasParent.offsetLeft;
-        let y = (event.clientY - canvas.offsetTop) - canvasParent.offsetTop;
+        rect = canvas.getBoundingClientRect();
+        x = event.clientX - rect.x;
+        y = event.clientY - rect.y;
         startingPoint = [x, y];
+
     })
     canvas.addEventListener("mousemove", (event) => {
         if (draw) {
@@ -36,10 +42,8 @@ colorPicker(document.querySelector(".color-picker-box"), (value) => {
             cx.lineCap = "round";
             cx.lineWidth = window.brushSize;
 
-
-            console.log(cx.globalCompositeOperation)
-            let x = (event.clientX - canvas.offsetLeft) - canvasParent.offsetLeft;
-            let y = (event.clientY - canvas.offsetTop) - canvasParent.offsetTop;
+            x = event.clientX - rect.x;
+            y = event.clientY - rect.y;
 
             cx.moveTo(...startingPoint);
             cx.lineTo(x, y);
@@ -55,8 +59,8 @@ colorPicker(document.querySelector(".color-picker-box"), (value) => {
     canvas.addEventListener("mouseout", drawFinish);
 }())
 window.onresize = () => resize(
-    document.querySelector("#canvas").parentElement.clientWidth,
-    document.querySelector("#canvas").width
+    document.querySelector("#canvas").clientWidth,
+    document.querySelector("#canvas").clientHeight
 );
 
 function resize(w, h) {
