@@ -28,11 +28,14 @@ sliderControl("#slider-control", 1, 40, (value) => {
     linePreview(window.color, value);
 });
 
+window.addEventListener("resize", () => {
+    linePreview(window.color, window.brushSize);
+})
 function linePreview(color, size) {
     const canvas = document.querySelector("#line-preview");
     let cx = canvas.getContext("2d");
-    let displayWidth = canvas.width = canvas.parentElement.clientWidth;
-    let displayHeight = canvas.height = canvas.parentElement.clientHeight;
+    let displayWidth = canvas.width = canvas.clientWidth;
+    let displayHeight = canvas.height = canvas.clientHeight;
 
     cx.clearRect(0, 0, displayWidth, displayHeight);
     let k = displayWidth / displayHeight;
