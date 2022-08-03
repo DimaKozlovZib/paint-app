@@ -106,4 +106,27 @@ document.querySelectorAll("[class*=__mobile-icon]").forEach(item => {
     })
 })
 
+document.querySelector("#tools-mobile-icon").onclick = (event) => {
+    let item = document.querySelector("#tools-mobile-icon");
+    let itemImg = document.querySelector("#tools-mobile-icon > img");
+    let itemToolNumber = Number(item.getAttribute("data-toolNumber"));
+    if (itemToolNumber === 1) {
+        itemToolNumber = 0;
+        console.log("fvifuvfhu")
+    } else {
+        itemToolNumber++;
+    }
+    console.log(itemToolNumber)
+    switch (itemToolNumber) {
+        case 0:
+            itemImg.setAttribute("src", "image/pensil.png");
+            item.setAttribute("data-toolNumber", "0");
+            break;
+        case 1:
+            itemImg.setAttribute("src", "image/eraser.png");
+            item.setAttribute("data-toolNumber", "1")
+            break;
+    }
+
+}
 
