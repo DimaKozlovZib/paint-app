@@ -112,7 +112,6 @@ document.querySelector("#tools-mobile-icon").onclick = (event) => {
     let itemToolNumber = Number(item.getAttribute("data-toolNumber"));
     if (itemToolNumber === 1) {
         itemToolNumber = 0;
-        console.log("fvifuvfhu")
     } else {
         itemToolNumber++;
     }
@@ -121,10 +120,12 @@ document.querySelector("#tools-mobile-icon").onclick = (event) => {
         case 0:
             itemImg.setAttribute("src", "image/pensil.png");
             item.setAttribute("data-toolNumber", "0");
+            window.eraser = false;
             break;
         case 1:
             itemImg.setAttribute("src", "image/eraser.png");
-            item.setAttribute("data-toolNumber", "1")
+            item.setAttribute("data-toolNumber", "1");
+            window.eraser = true;
             break;
     }
 
